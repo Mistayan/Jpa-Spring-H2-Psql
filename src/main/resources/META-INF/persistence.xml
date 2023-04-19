@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns="https://jakarta.ee/xml/ns/persistence"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
+             version="3.0">
+    <persistence-unit name="crm" transaction-type="RESOURCE_LOCAL">
+        <class>fr.epsi.rennes.cours.uml.umlspringjpa.model.MyUser</class>
+        <class>fr.epsi.rennes.cours.uml.umlspringjpa.model.Agenda</class>
+        <class>fr.epsi.rennes.cours.uml.umlspringjpa.model.Contact</class>
+        <class>fr.epsi.rennes.cours.uml.umlspringjpa.model.Address</class>
+        <class>fr.epsi.rennes.cours.uml.umlspringjpa.model.Email</class>
+        <class>fr.epsi.rennes.cours.uml.umlspringjpa.model.Phone</class>
+        <properties>
+            <!-- database connection -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/test"/>
+            <property name="jakarta.persistence.jdbc.user" value="armimi"/>
+            <property name="jakarta.persistence.jdbc.password" value="acme12"/>
+            <property name="hibernate.logging.level" value="ALL"/>
+        </properties>
+    </persistence-unit>
+    <persistence-unit name="crm-test" transaction-type="RESOURCE_LOCAL">
+        <class>fr.epsi.rennes.cours.uml.umlspringjpa.model.MyUser</class>
+        <class>fr.epsi.rennes.cours.uml.umlspringjpa.model.Agenda</class>
+        <class>fr.epsi.rennes.cours.uml.umlspringjpa.model.Contact</class>
+        <class>fr.epsi.rennes.cours.uml.umlspringjpa.model.Address</class>
+        <class>fr.epsi.rennes.cours.uml.umlspringjpa.model.Email</class>
+        <class>fr.epsi.rennes.cours.uml.umlspringjpa.model.Phone</class>
+        <properties>
+            <!-- database connection -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver"/>
+            <property name="jakarta.persistence.jdbc.url"
+                      value="jdbc:h2:mem:test;INIT=RUNSCRIPT FROM 'classpath:create.sql'\;RUNSCRIPT FROM 'classpath:data.sql'"/>
+            <!-- Hibernate properties -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="validate"/>
+            <property name="hibernate.format_sql" value="false"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <!-- <property name="jakarta.persistence.schema-generation.database.action" value="create"/>  -->
+        </properties>
+    </persistence-unit>
+</persistence>

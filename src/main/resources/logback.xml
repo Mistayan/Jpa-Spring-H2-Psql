@@ -1,0 +1,40 @@
+<configuration scan="true" scanPeriod="20 seconds">
+
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+
+    <appender name="FILE-ROLLING" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>C:/projets/crm/logs/crm-jpa.log</file>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>C:/projets/crm/logs/archived/app.%d{yyyy-MM-dd}.%i.log.gz</fileNamePattern>
+            <!-- Taille d'un fichier -->
+            <maxFileSize>10MB</maxFileSize>
+            <!-- Taille max des archives, si ça dépasse, suppression des anciennes archives -->
+            <totalSizeCap>1GB</totalSizeCap>
+            <!-- 5 fichiers d'historique -->
+            <maxHistory>5</maxHistory>
+        </rollingPolicy>
+
+        <encoder>
+            <pattern>%d %p %c{1} %M [%t] %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.hibernate" level="debug" additivity="false">
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+    <logger name="fr.epsi.rennes.cours.persistance.jpa_exo" level="debug" additivity="false">
+        <appender-ref ref="FILE-ROLLING"/>
+    </logger>
+
+    <root level="error">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+
+</configuration>
