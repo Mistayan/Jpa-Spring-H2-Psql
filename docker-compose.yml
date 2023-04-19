@@ -18,31 +18,31 @@ services:
       - POSTGRES_DB=test
       - POSTGRES_INITDB_ARGS=--data-checksums
 
-  app:
-    image: alpine:3.14
-    ports:
-      - "5433:8080"
-    environment:
-      - PGHOST='db'
-      - PGDATABASE='test'
-      - PGUSER='armimi'
-      - PGPASSWORD='acme12'
-      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-      - SPRING_JPA_SHOW_SQL=true
-      - SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL=true
-      - SPRING_JPA_PROPERTIES_HIBERNATE_USE_SQL_COMMENTS=true
-      - SPRING_JPA_PROPERTIES_HIBERNATE_HBM2DDL_AUTO=update
-      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
-      - SPRING_JPA_PROPERTIES_HIBERNATE_NAMING_STRATEGY=org.hibernate.cfg.ImprovedNamingStrategy
-
-    volumes:
-      - ./build/lib/*.jar:/opt/app.jar
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./data:/var/lib/postgresql/data
-    links:
-      - db
-    depends_on:
-        - db
-
-    command: java -jar /opt/app.jar
+#  app:
+#    image: alpine:3.14
+#    ports:
+#      - "5433:8080"
+#    environment:
+#      - PGHOST='db'
+#      - PGDATABASE='test'
+#      - PGUSER='armimi'
+#      - PGPASSWORD='acme12'
+#      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
+#      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+#      - SPRING_JPA_SHOW_SQL=true
+#      - SPRING_JPA_PROPERTIES_HIBERNATE_FORMAT_SQL=true
+#      - SPRING_JPA_PROPERTIES_HIBERNATE_USE_SQL_COMMENTS=true
+#      - SPRING_JPA_PROPERTIES_HIBERNATE_HBM2DDL_AUTO=update
+#      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.PostgreSQLDialect
+#      - SPRING_JPA_PROPERTIES_HIBERNATE_NAMING_STRATEGY=org.hibernate.cfg.ImprovedNamingStrategy
+#
+#    volumes:
+#      - ./build/lib/Uml-Spring-Jpa-0.0.1-SNAPSHOT.jar:/opt/app.jar
+#      - /var/run/docker.sock:/var/run/docker.sock:ro
+#      - ./data:/var/lib/postgresql/data
+#    links:
+#      - db
+#    depends_on:
+#        - db
+#
+#    command: java -jar /opt/app.jar
